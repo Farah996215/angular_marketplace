@@ -1,0 +1,98 @@
+<div class="signin-container">
+  <div class="signin-card">
+    
+    <!-- Header -->
+    <div class="signin-header">
+      <a routerLink="/" class="logo-link">
+        <span class="logo-text">AutoMarket</span>
+        <span class="logo-dot">.</span>
+      </a>
+      <h1 class="signin-title">Welcome Back</h1>
+      <p class="signin-subtitle">Sign in to your account to continue</p>
+    </div>
+
+    <!-- Error Message -->
+    @if (errorMessage) {
+      <div class="error-message">
+        <mat-icon>error</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+    }
+
+    <!-- Signin Form -->
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="signin-form">
+      
+      <!-- Email -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Email Address</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="john.doe@example.com">
+        <mat-icon matSuffix>email</mat-icon>
+        @if (loginForm.get('email')?.hasError('required')) {
+          <mat-error>Email is required</mat-error>
+        }
+        @if (loginForm.get('email')?.hasError('email')) {
+          <mat-error>Please enter a valid email</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Password -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Password</mat-label>
+        <input 
+          matInput 
+          [type]="hidePassword ? 'password' : 'text'" 
+          formControlName="password" 
+          placeholder="Enter your password"
+        >
+        <button 
+          mat-icon-button 
+          matSuffix 
+          (click)="togglePasswordVisibility()" 
+          type="button"
+        >
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+        </button>
+        @if (loginForm.get('password')?.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+        }
+        @if (loginForm.get('password')?.hasError('minlength')) {
+          <mat-error>Minimum 8 characters</mat-error>
+        }
+      </mat-form-field>
+
+      <!-- Remember Me & Forgot Password -->
+      <div class="form-options">
+        <mat-checkbox formControlName="rememberMe" class="remember-checkbox">
+          Remember me
+        </mat-checkbox>
+        
+        <a routerLink="/forgot-password" class="forgot-password-link">
+          Forgot password?
+        </a>
+      </div>
+
+   <button 
+  mat-raised-button 
+  type="submit" 
+  class="submit-btn" 
+  [disabled]="isLoading"
+>
+
+  @if (isLoading) {
+    <mat-icon class="spinner">refresh</mat-icon>
+  }
+
+  {{ isLoading ? 'Signing In...' : 'Sign In' }}
+
+</button>
+
+
+      <!-- Sign Up Link -->
+      <div class="signup-link">
+        Don't have an account? 
+        <a routerLink="/signup" class="link">Sign Up</a>
+      </div>
+
+    </form>
+  </div>
+</div>

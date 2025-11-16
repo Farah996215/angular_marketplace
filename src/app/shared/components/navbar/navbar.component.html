@@ -25,35 +25,101 @@
     <div class="nav-actions">
       
       <!-- Search Button -->
-      <button mat-icon-button class="nav-icon-btn">
+      <button mat-icon-button class="nav-icon-btn" routerLink="/cars">
         <mat-icon>search</mat-icon>
       </button>
 
-      <!-- Favorites Button -->
-      <button mat-icon-button class="nav-icon-btn">
-        <mat-icon>favorite</mat-icon>
-      </button>
+      <!-- Favorites Button (Show only when logged in) -->
+      @if (isLoggedIn) {
+        <button mat-icon-button class="nav-icon-btn" routerLink="/favorites">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      }
 
       <!-- User Menu -->
-      <button mat-icon-button [matMenuTriggerFor]="userMenu" class="nav-icon-btn">
-        <mat-icon>account_circle</mat-icon>
-      </button>
+      @if (isLoggedIn && currentUser) {
+        <!-- Logged In User Menu -->
+        <button 
+          mat-icon-button 
+          [matMenuTriggerFor]="userMenu" 
+          class="user-menu-btn"
+        >
+          <div class="user-avatar">
+            {{ getUserInitials() }}
+          </div>
+        </button>
 
-      <mat-menu #userMenu="matMenu" class="user-menu">
-        <button mat-menu-item>
-          <mat-icon>login</mat-icon>
-          <span>Sign In</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>person_add</mat-icon>
-          <span>Sign Up</span>
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item disabled>
-          <mat-icon>dashboard</mat-icon>
-          <span>Dashboard</span>
-        </button>
-      </mat-menu>
+        <mat-menu #userMenu="matMenu" class="user-menu">
+          <!-- User Info -->
+          <div class="user-info">
+            <div class="user-avatar large">
+              {{ getUserInitials() }}
+            </div>
+            <div class="user-details">
+              <div class="user-name">{{ getUserDisplayName() }}</div>
+              <div class="user-email">{{ currentUser.email }}</div>
+              <div class="user-role">{{ currentUser.role | titlecase }}</div>
+            </div>
+          </div>
+
+          <mat-divider></mat-divider>
+
+          <!-- Dashboard Link -->
+          <button mat-menu-item [routerLink]="getDashboardRoute()">
+            <mat-icon>dashboard</mat-icon>
+            <span>{{ getDashboardLabel() }}</span>
+          </button>
+
+          <!-- Profile -->
+          <button mat-menu-item routerLink="/profile">
+            <mat-icon>person</mat-icon>
+            <span>My Profile</span>
+          </button>
+
+          <!-- Seller Specific Links -->
+          @if (currentUser.role === 'seller') {
+            <button mat-menu-item routerLink="/seller/my-cars">
+              <mat-icon>directions_car</mat-icon>
+              <span>My Cars</span>
+            </button>
+          }
+
+          <!-- Customer Specific Links -->
+          @if (currentUser.role === 'customer') {
+            <button mat-menu-item routerLink="/customer/favorites">
+              <mat-icon>favorite</mat-icon>
+              <span>My Favorites</span>
+            </button>
+          }
+
+          <mat-divider></mat-divider>
+
+          <!-- Logout -->
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            <span>Sign Out</span>
+          </button>
+        </mat-menu>
+
+      } @else {
+        <!-- Not Logged In - Show Auth Buttons -->
+        <div class="auth-buttons">
+          <a 
+            mat-button 
+            routerLink="/signin" 
+            class="signin-btn"
+          >
+            Sign In
+          </a>
+          <a 
+            mat-raised-button 
+            routerLink="/signup" 
+            class="signup-btn"
+          >
+            Sign Up
+          </a>
+        </div>
+      }
 
     </div>
 

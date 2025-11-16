@@ -65,7 +65,7 @@
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: vars.$spacing-xs;
+  gap: vars.$spacing-sm;
 }
 
 .nav-icon-btn {
@@ -77,19 +77,123 @@
   }
 }
 
+// User Avatar
+.user-menu-btn {
+  padding: 4px !important;
+  
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: vars.$accent-gradient;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: vars.$font-bold;
+    font-size: 0.9rem;
+    
+    &.large {
+      width: 48px;
+      height: 48px;
+      font-size: 1.1rem;
+    }
+  }
+  
+  &:hover {
+    background: rgba(124, 58, 237, 0.1) !important;
+  }
+}
+
+// Auth Buttons (when not logged in)
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    display: none;
+  }
+}
+
+.signin-btn {
+  color: vars.$text-secondary !important;
+  font-weight: vars.$font-medium;
+  
+  &:hover {
+    color: vars.$text-primary !important;
+    background: rgba(124, 58, 237, 0.1) !important;
+  }
+}
+
+.signup-btn {
+  background: vars.$accent-gradient !important;
+  color: white !important;
+  font-weight: vars.$font-semibold;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+  }
+}
+
 // User Menu Styling
 .user-menu {
   background: vars.$card-primary !important;
   border: 1px solid vars.$border-primary !important;
-  border-radius: vars.$radius-md !important;
+  border-radius: vars.$radius-lg !important;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  padding: vars.$spacing-sm !important;
+  min-width: 250px !important;
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-md;
+    padding: vars.$spacing-md;
+    background: rgba(124, 58, 237, 0.05);
+    border-radius: vars.$radius-md;
+    margin-bottom: vars.$spacing-sm;
+  }
+
+  .user-details {
+    flex: 1;
+    
+    .user-name {
+      font-family: vars.$font-heading;
+      font-weight: vars.$font-semibold;
+      color: vars.$text-primary;
+      font-size: 1rem;
+      margin-bottom: 2px;
+    }
+    
+    .user-email {
+      color: vars.$text-secondary;
+      font-size: 0.8rem;
+      margin-bottom: 2px;
+    }
+    
+    .user-role {
+      color: vars.$accent-cyan;
+      font-size: 0.75rem;
+      font-weight: vars.$font-medium;
+      text-transform: uppercase;
+    }
+  }
 
   .mat-menu-item {
     color: vars.$text-primary !important;
     font-family: vars.$font-body;
+    border-radius: vars.$radius-md;
+    margin: 2px 0;
     
     &:hover {
       background: rgba(124, 58, 237, 0.1) !important;
+    }
+    
+    mat-icon {
+      color: vars.$text-secondary;
+      margin-right: vars.$spacing-sm;
     }
   }
 
@@ -107,5 +211,25 @@
   
   .logo-link {
     font-size: 1.25rem;
+  }
+  
+  .auth-buttons {
+    .signin-btn {
+      display: none;
+    }
+    
+    .signup-btn {
+      font-size: 0.9rem;
+      padding: 0 vars.$spacing-md !important;
+    }
+  }
+}
+
+// Material overrides
+:host ::ng-deep {
+  .mat-mdc-menu-item-text {
+    display: flex;
+    align-items: center;
+    gap: vars.$spacing-sm;
   }
 }

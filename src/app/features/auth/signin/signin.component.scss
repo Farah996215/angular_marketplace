@@ -1,0 +1,216 @@
+@use '../../../../styles/variables' as vars;
+
+.signin-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: vars.$spacing-xl;
+  background: vars.$background-primary;
+}
+
+.signin-card {
+  @include vars.card-base;
+  width: 100%;
+  max-width: 450px;
+  margin: vars.$spacing-lg;
+  padding: vars.$spacing-xl;
+  border: 1px solid vars.$border-primary;
+  
+  &:hover {
+    transform: none;
+    border-color: vars.$accent-purple;
+  }
+}
+
+.signin-header {
+  text-align: center;
+  margin-bottom: vars.$spacing-xl;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: vars.$font-heading;
+  font-weight: vars.$font-bold;
+  font-size: 1.5rem;
+  margin-bottom: vars.$spacing-lg;
+}
+
+.logo-text {
+  color: vars.$text-primary;
+}
+
+.logo-dot {
+  color: vars.$accent-purple;
+}
+
+.signin-title {
+  font-family: vars.$font-heading;
+  font-size: 2rem;
+  font-weight: vars.$font-bold;
+  color: vars.$text-primary;
+  margin-bottom: vars.$spacing-sm;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    font-size: 1.75rem;
+  }
+}
+
+.signin-subtitle {
+  color: vars.$text-secondary;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-lg;
+}
+
+// Error Message
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+  padding: vars.$spacing-md;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid vars.$error;
+  border-radius: vars.$radius-md;
+  color: vars.$error;
+  
+  mat-icon {
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+// Form Options
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: vars.$spacing-sm;
+}
+
+.remember-checkbox {
+  color: vars.$text-secondary;
+}
+
+.forgot-password-link {
+  color: vars.$accent-purple;
+  text-decoration: none;
+  font-size: 0.9rem;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Submit Button
+.submit-btn {
+  @include vars.btn-primary;
+  width: 100%;
+  padding: vars.$spacing-md !important;
+  font-size: 1.1rem;
+  font-weight: vars.$font-semibold;
+  margin-top: vars.$spacing-sm;
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Sign Up Link
+.signup-link {
+  text-align: center;
+  color: vars.$text-secondary;
+  margin-top: vars.$spacing-lg;
+}
+
+.link {
+  color: vars.$accent-purple;
+  text-decoration: none;
+  font-weight: vars.$font-medium;
+  margin-left: 4px;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Material Form Field Overrides (same as signup)
+:host ::ng-deep {
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+  
+  .mdc-text-field--outlined {
+    background: vars.$card-primary;
+    
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: vars.$border-primary !important;
+    }
+    
+    &:hover {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: vars.$accent-purple !important;
+      }
+    }
+    
+    &.mdc-text-field--focused {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: vars.$accent-purple !important;
+      }
+    }
+  }
+  
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+  
+  .mat-mdc-form-field-error {
+    color: vars.$error;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+  
+  .mat-mdc-input-element {
+    color: vars.$text-primary;
+    
+    &::placeholder {
+      color: vars.$text-muted;
+    }
+  }
+  
+  .mat-mdc-form-field-label {
+    color: vars.$text-secondary !important;
+  }
+  
+  .mat-mdc-form-field-icon-suffix {
+    color: vars.$text-secondary;
+  }
+}

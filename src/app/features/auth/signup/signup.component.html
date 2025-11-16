@@ -1,0 +1,192 @@
+<div class="signup-container">
+  <div class="signup-card">
+    
+    <!-- Header -->
+    <div class="signup-header">
+      <a routerLink="/" class="logo-link">
+        <span class="logo-text">AutoMarket</span>
+        <span class="logo-dot">.</span>
+      </a>
+      <h1 class="signup-title">Create Your Account</h1>
+      <p class="signup-subtitle">Join thousands of car enthusiasts and sellers</p>
+    </div>
+
+    <!-- Signup Form -->
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+      
+      <!-- Personal Information -->
+      <div class="form-section">
+        <h3 class="section-title">Personal Information</h3>
+        
+        <div class="name-fields">
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstName" placeholder="John">
+            <mat-icon matSuffix>person</mat-icon>
+            @if (signupForm.get('firstName')?.hasError('required')) {
+              <mat-error>First name is required</mat-error>
+            }
+            @if (signupForm.get('firstName')?.hasError('minlength')) {
+              <mat-error>Minimum 2 characters</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" placeholder="Doe">
+            <mat-icon matSuffix>person</mat-icon>
+            @if (signupForm.get('lastName')?.hasError('required')) {
+              <mat-error>Last name is required</mat-error>
+            }
+            @if (signupForm.get('lastName')?.hasError('minlength')) {
+              <mat-error>Minimum 2 characters</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Email Address</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="john.doe@example.com">
+          <mat-icon matSuffix>email</mat-icon>
+          @if (signupForm.get('email')?.hasError('required')) {
+            <mat-error>Email is required</mat-error>
+          }
+          @if (signupForm.get('email')?.hasError('email')) {
+            <mat-error>Please enter a valid email</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phone" placeholder="+1 (555) 123-4567">
+          <mat-icon matSuffix>phone</mat-icon>
+          @if (signupForm.get('phone')?.hasError('required')) {
+            <mat-error>Phone number is required</mat-error>
+          }
+          @if (signupForm.get('phone')?.hasError('pattern')) {
+            <mat-error>Please enter a valid phone number</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Role Selection -->
+      <div class="form-section">
+        <h3 class="section-title">I want to</h3>
+        
+        <mat-radio-group formControlName="role" class="role-selection">
+          <mat-radio-button value="customer" class="role-option">
+            <div class="role-content">
+              <mat-icon class="role-icon">shopping_cart</mat-icon>
+              <div class="role-text">
+                <strong>Buy Cars</strong>
+                <span>Browse and purchase vehicles</span>
+              </div>
+            </div>
+          </mat-radio-button>
+
+          <mat-radio-button value="seller" class="role-option">
+            <div class="role-content">
+              <mat-icon class="role-icon">store</mat-icon>
+              <div class="role-text">
+                <strong>Sell Cars</strong>
+                <span>List and sell your vehicles</span>
+              </div>
+            </div>
+          </mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <!-- Password -->
+      <div class="form-section">
+        <h3 class="section-title">Security</h3>
+        
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Password</mat-label>
+          <input 
+            matInput 
+            [type]="hidePassword ? 'password' : 'text'" 
+            formControlName="password" 
+            placeholder="Create a strong password"
+          >
+          <button 
+            mat-icon-button 
+            matSuffix 
+            (click)="togglePasswordVisibility()" 
+            type="button"
+          >
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (signupForm.get('password')?.hasError('required')) {
+            <mat-error>Password is required</mat-error>
+          }
+          @if (signupForm.get('password')?.hasError('minlength')) {
+            <mat-error>Minimum 8 characters</mat-error>
+          }
+          @if (signupForm.get('password')?.hasError('pattern')) {
+            <mat-error>Include uppercase, lowercase, number & special character</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Confirm Password</mat-label>
+          <input 
+            matInput 
+            [type]="hideConfirmPassword ? 'password' : 'text'" 
+            formControlName="confirmPassword" 
+            placeholder="Repeat your password"
+          >
+          <button 
+            mat-icon-button 
+            matSuffix 
+            (click)="toggleConfirmPasswordVisibility()" 
+            type="button"
+          >
+            <mat-icon>{{ hideConfirmPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (signupForm.get('confirmPassword')?.hasError('required')) {
+            <mat-error>Please confirm your password</mat-error>
+          }
+          @if (signupForm.hasError('mismatch')) {
+            <mat-error>Passwords do not match</mat-error>
+          }
+        </mat-form-field>
+      </div>
+
+      <!-- Terms & Conditions -->
+      <div class="form-section">
+        <mat-checkbox formControlName="agreeToTerms" class="terms-checkbox">
+          I agree to the <a href="#" class="link">Terms of Service</a> and <a href="#" class="link">Privacy Policy</a>
+        </mat-checkbox>
+        @if (signupForm.get('agreeToTerms')?.hasError('required') && signupForm.get('agreeToTerms')?.touched) {
+          <mat-error class="terms-error">You must agree to the terms</mat-error>
+        }
+      </div>
+
+      <!-- Submit Button -->
+<button 
+  mat-raised-button 
+  type="submit" 
+  class="submit-btn" 
+  [disabled]="isLoading">
+
+  @if (isLoading) {
+    <ng-container>
+      <mat-icon class="spinner">refresh</mat-icon>
+      Creating Account...
+    </ng-container>
+  } @else {
+    Create Account
+  }
+
+</button>
+
+
+      <!-- Sign In Link -->
+      <div class="signin-link">
+        Already have an account? 
+        <a routerLink="/signin" class="link">Sign In</a>
+      </div>
+
+    </form>
+  </div>
+</div>

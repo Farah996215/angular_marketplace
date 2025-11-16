@@ -1,0 +1,297 @@
+@use '../../../../styles/variables' as vars;
+
+.signup-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: vars.$spacing-xl;
+  background: vars.$background-primary;
+}
+
+.signup-card {
+  @include vars.card-base;
+  width: 100%;
+  max-width: 500px;
+  margin: vars.$spacing-lg;
+  padding: vars.$spacing-xl;
+  border: 1px solid vars.$border-primary;
+  
+  &:hover {
+    transform: none;
+    border-color: vars.$accent-purple;
+  }
+}
+
+.signup-header {
+  text-align: center;
+  margin-bottom: vars.$spacing-xl;
+}
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: vars.$font-heading;
+  font-weight: vars.$font-bold;
+  font-size: 1.5rem;
+  margin-bottom: vars.$spacing-lg;
+}
+
+.logo-text {
+  color: vars.$text-primary;
+}
+
+.logo-dot {
+  color: vars.$accent-purple;
+}
+
+.signup-title {
+  font-family: vars.$font-heading;
+  font-size: 2rem;
+  font-weight: vars.$font-bold;
+  color: vars.$text-primary;
+  margin-bottom: vars.$spacing-sm;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    font-size: 1.75rem;
+  }
+}
+
+.signup-subtitle {
+  color: vars.$text-secondary;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-lg;
+}
+
+.form-section {
+  padding: vars.$spacing-lg;
+  background: rgba(26, 33, 66, 0.5);
+  border-radius: vars.$radius-lg;
+  border: 1px solid vars.$border-primary;
+}
+
+.section-title {
+  font-family: vars.$font-heading;
+  font-size: 1.25rem;
+  font-weight: vars.$font-semibold;
+  color: vars.$text-primary;
+  margin-bottom: vars.$spacing-md;
+}
+
+.name-fields {
+  display: flex;
+  gap: vars.$spacing-md;
+  margin-bottom: vars.$spacing-md;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.half-width {
+  flex: 1;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    width: 100%;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+// Role Selection Styles
+.role-selection {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-sm;
+}
+
+.role-option {
+  border: 2px solid vars.$border-primary;
+  border-radius: vars.$radius-md;
+  padding: vars.$spacing-md;
+  margin: 0 !important;
+  transition: all vars.$transition-normal;
+  
+  ::ng-deep .mdc-radio__background {
+    display: none;
+  }
+  
+  &.mat-mdc-radio-checked {
+    border-color: vars.$accent-purple;
+    background: rgba(124, 58, 237, 0.1);
+    
+    .role-icon {
+      color: vars.$accent-purple;
+    }
+  }
+  
+  &:hover {
+    border-color: vars.$accent-purple;
+    background: rgba(124, 58, 237, 0.05);
+  }
+}
+
+.role-content {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-md;
+}
+
+.role-icon {
+  font-size: 2rem;
+  width: 2rem;
+  height: 2rem;
+  color: vars.$text-secondary;
+}
+
+.role-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  
+  strong {
+    font-family: vars.$font-heading;
+    font-size: 1.1rem;
+    font-weight: vars.$font-semibold;
+    color: vars.$text-primary;
+  }
+  
+  span {
+    font-size: 0.9rem;
+    color: vars.$text-secondary;
+  }
+}
+
+// Terms Checkbox
+.terms-checkbox {
+  color: vars.$text-secondary;
+  
+  ::ng-deep .mdc-checkbox__background {
+    border-color: vars.$border-primary;
+  }
+}
+
+.terms-error {
+  display: block;
+  margin-top: vars.$spacing-xs;
+}
+
+// Submit Button
+.submit-btn {
+  @include vars.btn-primary;
+  width: 100%;
+  padding: vars.$spacing-md !important;
+  font-size: 1.1rem;
+  font-weight: vars.$font-semibold;
+  margin-top: vars.$spacing-md;
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Sign In Link
+.signin-link {
+  text-align: center;
+  color: vars.$text-secondary;
+  margin-top: vars.$spacing-lg;
+}
+
+.link {
+  color: vars.$accent-purple;
+  text-decoration: none;
+  font-weight: vars.$font-medium;
+  margin-left: 4px;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Material Form Field Overrides
+:host ::ng-deep {
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+  
+  .mdc-text-field--outlined {
+    background: vars.$card-primary;
+    
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: vars.$border-primary !important;
+    }
+    
+    &:hover {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: vars.$accent-purple !important;
+      }
+    }
+    
+    &.mdc-text-field--focused {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: vars.$accent-purple !important;
+      }
+    }
+  }
+  
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+  
+  .mat-mdc-form-field-error {
+    color: vars.$error;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+  
+  .mat-mdc-input-element {
+    color: vars.$text-primary;
+    
+    &::placeholder {
+      color: vars.$text-muted;
+    }
+  }
+  
+  .mat-mdc-form-field-label {
+    color: vars.$text-secondary !important;
+  }
+  
+  .mat-mdc-form-field-icon-suffix {
+    color: vars.$text-secondary;
+  }
+  
+  .mat-mdc-radio-button .mdc-radio__native-control:enabled:checked+.mdc-radio__background .mdc-radio__outer-circle {
+    border-color: vars.$accent-purple;
+  }
+  
+  .mat-mdc-radio-button .mdc-radio__native-control:enabled+.mdc-radio__background .mdc-radio__inner-circle {
+    border-color: vars.$accent-purple;
+    background-color: vars.$accent-purple;
+  }
+}
