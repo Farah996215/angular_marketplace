@@ -1,0 +1,176 @@
+@use '../../../../styles/variables' as vars;
+
+.car-card {
+  @include vars.card-base;
+  overflow: hidden;
+  transition: all vars.$transition-normal;
+  
+  &:hover {
+    @include vars.card-glow;
+    transform: translateY(-8px);
+  }
+}
+
+.car-image-container {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.car-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform vars.$transition-slow;
+  
+  .car-card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.car-badges {
+  position: absolute;
+  top: vars.$spacing-sm;
+  left: vars.$spacing-sm;
+  display: flex;
+  gap: vars.$spacing-xs;
+  z-index: 2;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: vars.$font-semibold;
+  padding: 4px 8px;
+  border-radius: vars.$radius-sm;
+  
+  &.new-badge {
+    background: vars.$success !important;
+    color: white !important;
+  }
+  
+  &.featured-badge {
+    background: vars.$accent-purple !important;
+    color: white !important;
+  }
+}
+
+.favorite-btn {
+  position: absolute;
+  top: vars.$spacing-sm;
+  right: vars.$spacing-sm;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  color: white;
+  z-index: 2;
+  
+  &:hover {
+    background: rgba(124, 58, 237, 0.8);
+  }
+}
+
+.favorite-icon {
+  color: inherit;
+}
+
+.car-content {
+  padding: vars.$spacing-md;
+}
+
+.car-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: vars.$spacing-xs;
+}
+
+.car-title {
+  font-family: vars.$font-heading;
+  font-size: 1.25rem;
+  font-weight: vars.$font-semibold;
+  color: vars.$text-primary;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.car-price {
+  font-family: vars.$font-heading;
+  font-size: 1.5rem;
+  font-weight: vars.$font-bold;
+  color: vars.$accent-cyan;
+  white-space: nowrap;
+}
+
+.car-year {
+  color: vars.$text-secondary;
+  margin-bottom: vars.$spacing-md;
+  font-size: 0.9rem;
+}
+
+.car-specs {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-sm;
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+  color: vars.$text-secondary;
+  font-size: 0.9rem;
+}
+
+.spec-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
+  color: vars.$accent-purple;
+}
+
+.car-actions {
+  display: flex;
+  gap: vars.$spacing-sm;
+  padding: 0 vars.$spacing-md vars.$spacing-md !important;
+  
+  button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: vars.$spacing-xs;
+    font-weight: vars.$font-medium;
+    border-radius: vars.$radius-md;
+    transition: all vars.$transition-normal;
+  }
+}
+
+.view-details-btn {
+  border-color: vars.$accent-purple !important;
+  color: vars.$accent-purple !important;
+  
+  &:hover {
+    background: vars.$accent-purple !important;
+    color: white !important;
+  }
+}
+
+.contact-btn {
+  color: vars.$text-secondary !important;
+  
+  &:hover {
+    background: rgba(124, 58, 237, 0.1) !important;
+    color: vars.$accent-purple !important;
+  }
+}
+
+// Material overrides
+:host ::ng-deep {
+  .mat-mdc-card {
+    background: vars.$card-primary;
+    border: 1px solid vars.$border-primary;
+  }
+  
+  .mat-mdc-chip {
+    background: transparent !important;
+  }
+}

@@ -1,0 +1,74 @@
+<mat-card class="car-card">
+  <!-- Image Section with Badges -->
+  <div class="car-image-container">
+    <img 
+      [src]="car.image" 
+      [alt]="car.brand + ' ' + car.model"
+      class="car-image"
+    >
+    
+    <!-- Badges -->
+    <div class="car-badges">
+      @if (car.isNew) {
+        <mat-chip class="badge new-badge">New</mat-chip>
+      }
+      @if (car.isFeatured) {
+        <mat-chip class="badge featured-badge">Featured</mat-chip>
+      }
+    </div>
+
+    <!-- Favorite Button -->
+    <button 
+      class="favorite-btn" 
+      mat-icon-button
+      (click)="toggleFavorite()"
+    >
+      <mat-icon class="favorite-icon">
+        {{ isFavorite ? 'favorite' : 'favorite_border' }}
+      </mat-icon>
+    </button>
+  </div>
+
+  <!-- Content Section -->
+  <mat-card-content class="car-content">
+    <!-- Title and Price -->
+    <div class="car-header">
+      <h3 class="car-title">{{ car.brand }} {{ car.model }}</h3>
+      <span class="car-price">{{ formatPrice(car.price) }}</span>
+    </div>
+
+    <!-- Year -->
+    <p class="car-year">{{ car.year }}</p>
+
+    <!-- Specifications -->
+    <div class="car-specs">
+      <div class="spec-item">
+        <mat-icon class="spec-icon">speed</mat-icon>
+        <span>{{ formatMileage(car.mileage) }}</span>
+      </div>
+      
+      <div class="spec-item">
+        <mat-icon class="spec-icon">local_gas_station</mat-icon>
+        <span>{{ car.fuelType }}</span>
+      </div>
+      
+      <div class="spec-item">
+        <mat-icon class="spec-icon">settings</mat-icon>
+        <span>{{ car.transmission }}</span>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <!-- Actions -->
+  <mat-card-actions class="car-actions">
+    <button class="view-details-btn" mat-stroked-button>
+      <mat-icon>visibility</mat-icon>
+      View Details
+    </button>
+    
+    <button class="contact-btn" mat-button>
+      <mat-icon>message</mat-icon>
+      Contact
+    </button>
+  </mat-card-actions>
+</mat-card>

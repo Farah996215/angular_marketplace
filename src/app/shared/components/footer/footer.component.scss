@@ -1,0 +1,228 @@
+@use '../../../../styles/variables' as vars;
+
+.footer {
+  background: vars.$background-dark;
+  border-top: 1px solid vars.$border-primary;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 vars.$spacing-lg;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: vars.$spacing-xl;
+  padding: vars.$spacing-xxl 0 vars.$spacing-xl;
+  
+  @media (max-width: vars.$breakpoint-tablet) {
+    grid-template-columns: 1fr 1fr;
+    gap: vars.$spacing-lg;
+  }
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    grid-template-columns: 1fr;
+    gap: vars.$spacing-lg;
+  }
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  font-family: vars.$font-heading;
+  font-size: 1.5rem;
+  font-weight: vars.$font-bold;
+  margin-bottom: vars.$spacing-md;
+}
+
+.logo-text {
+  color: vars.$text-primary;
+}
+
+.logo-dot {
+  color: vars.$accent-purple;
+}
+
+.footer-description {
+  color: vars.$text-secondary;
+  line-height: 1.6;
+  margin-bottom: vars.$spacing-lg;
+}
+
+.social-links {
+  display: flex;
+  gap: vars.$spacing-sm;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: vars.$card-primary;
+  border: 1px solid vars.$border-primary;
+  border-radius: vars.$radius-md;
+  color: vars.$text-secondary;
+  text-decoration: none;
+  transition: all vars.$transition-normal;
+  
+  &:hover {
+    background: vars.$accent-purple;
+    color: white;
+    border-color: vars.$accent-purple;
+    transform: translateY(-2px);
+  }
+  
+  mat-icon {
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.footer-heading {
+  font-family: vars.$font-heading;
+  font-size: 1.25rem;
+  font-weight: vars.$font-semibold;
+  color: vars.$text-primary;
+  margin-bottom: vars.$spacing-md;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-sm;
+}
+
+.footer-link {
+  color: vars.$text-secondary;
+  text-decoration: none;
+  transition: color vars.$transition-normal;
+  
+  &:hover {
+    color: vars.$accent-purple;
+  }
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-md;
+  margin-bottom: vars.$spacing-lg;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+  color: vars.$text-secondary;
+  
+  .contact-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+    color: vars.$accent-cyan;
+  }
+}
+
+.newsletter {
+  margin-top: vars.$spacing-md;
+}
+
+.newsletter-title {
+  font-size: 1rem;
+  font-weight: vars.$font-semibold;
+  color: vars.$text-primary;
+  margin-bottom: vars.$spacing-sm;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: vars.$spacing-xs;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: vars.$spacing-sm vars.$spacing-md;
+  background: vars.$card-primary;
+  border: 1px solid vars.$border-primary;
+  border-radius: vars.$radius-md;
+  color: vars.$text-primary;
+  font-family: vars.$font-body;
+  
+  &::placeholder {
+    color: vars.$text-muted;
+  }
+  
+  &:focus {
+    outline: none;
+    border-color: vars.$accent-purple;
+  }
+}
+
+.newsletter-btn {
+  background: vars.$accent-purple !important;
+  color: white !important;
+  min-width: auto !important;
+  padding: vars.$spacing-sm !important;
+  
+  mat-icon {
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+.footer-bottom {
+  border-top: 1px solid vars.$border-primary;
+  padding: vars.$spacing-lg 0;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    flex-direction: column;
+    gap: vars.$spacing-md;
+    text-align: center;
+  }
+}
+
+.copyright {
+  color: vars.$text-muted;
+  margin: 0;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: vars.$spacing-lg;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    gap: vars.$spacing-md;
+  }
+}
+
+.footer-bottom-link {
+  color: vars.$text-secondary;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color vars.$transition-normal;
+  
+  &:hover {
+    color: vars.$accent-purple;
+  }
+}
