@@ -1,0 +1,59 @@
+/* Import Variables with @use - MUST BE FIRST */
+@use 'styles/variables' as vars;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: vars.$font-body;
+  background: vars.$background-primary;
+  color: vars.$text-primary;
+  line-height: 1.6;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: vars.$surface-primary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: vars.$accent-purple;
+  border-radius: vars.$radius-sm;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: vars.$accent-hover;
+}
+
+/* Utility Classes */
+.text-accent {
+  color: vars.$accent-purple;
+}
+
+.text-cyan {
+  color: vars.$accent-cyan;
+}
+
+.bg-surface {
+  background: vars.$surface-primary;
+}
+
+.bg-card {
+  background: vars.$card-primary;
+}
+
+.glass-effect {
+  @include vars.glassmorphism;
+}

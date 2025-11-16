@@ -1,0 +1,111 @@
+@use '../../../../styles/variables' as vars;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  background: rgba(10, 14, 39, 0.95) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid vars.$border-primary;
+  padding: 0;
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 vars.$spacing-lg;
+  }
+}
+
+// Logo Styles
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: vars.$font-heading;
+  font-weight: vars.$font-bold;
+  font-size: 1.5rem;
+  margin-right: vars.$spacing-lg;
+}
+
+.logo-text {
+  color: vars.$text-primary;
+}
+
+.logo-dot {
+  color: vars.$accent-purple;
+}
+
+// Desktop Navigation
+.nav-menu {
+  display: none;
+  align-items: center;
+  flex: 1;
+
+  @media (min-width: vars.$breakpoint-tablet) {
+    display: flex;
+  }
+}
+
+.nav-link {
+  color: vars.$text-secondary !important;
+  font-weight: vars.$font-medium;
+  margin: 0 vars.$spacing-xs;
+  
+  &:hover {
+    color: vars.$text-primary !important;
+    background: rgba(124, 58, 237, 0.1) !important;
+  }
+}
+
+// Right Side Actions
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-xs;
+}
+
+.nav-icon-btn {
+  color: vars.$text-secondary !important;
+  
+  &:hover {
+    color: vars.$text-primary !important;
+    background: rgba(124, 58, 237, 0.1) !important;
+  }
+}
+
+// User Menu Styling
+.user-menu {
+  background: vars.$card-primary !important;
+  border: 1px solid vars.$border-primary !important;
+  border-radius: vars.$radius-md !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+
+  .mat-menu-item {
+    color: vars.$text-primary !important;
+    font-family: vars.$font-body;
+    
+    &:hover {
+      background: rgba(124, 58, 237, 0.1) !important;
+    }
+  }
+
+  .mat-divider {
+    border-top-color: vars.$border-primary !important;
+    margin: vars.$spacing-xs 0 !important;
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: vars.$breakpoint-tablet) {
+  .nav-menu {
+    display: none;
+  }
+  
+  .logo-link {
+    font-size: 1.25rem;
+  }
+}

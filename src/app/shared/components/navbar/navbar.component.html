@@ -1,0 +1,61 @@
+<mat-toolbar class="navbar">
+  <div class="nav-container">
+    
+    <!-- Logo -->
+    <div class="logo">
+      <a routerLink="/" class="logo-link">
+        <span class="logo-text">AutoMarket</span>
+        <span class="logo-dot">.</span>
+      </a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <div class="nav-menu">
+      @for (item of navItems; track item.label) {
+        <a 
+          [routerLink]="item.path" 
+          class="nav-link"
+          mat-button>
+          {{ item.label }}
+        </a>
+      }
+    </div>
+
+    <!-- Right Side Actions -->
+    <div class="nav-actions">
+      
+      <!-- Search Button -->
+      <button mat-icon-button class="nav-icon-btn">
+        <mat-icon>search</mat-icon>
+      </button>
+
+      <!-- Favorites Button -->
+      <button mat-icon-button class="nav-icon-btn">
+        <mat-icon>favorite</mat-icon>
+      </button>
+
+      <!-- User Menu -->
+      <button mat-icon-button [matMenuTriggerFor]="userMenu" class="nav-icon-btn">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+
+      <mat-menu #userMenu="matMenu" class="user-menu">
+        <button mat-menu-item>
+          <mat-icon>login</mat-icon>
+          <span>Sign In</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>person_add</mat-icon>
+          <span>Sign Up</span>
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item disabled>
+          <mat-icon>dashboard</mat-icon>
+          <span>Dashboard</span>
+        </button>
+      </mat-menu>
+
+    </div>
+
+  </div>
+</mat-toolbar>

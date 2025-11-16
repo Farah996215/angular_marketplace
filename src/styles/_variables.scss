@@ -1,0 +1,136 @@
+//Primary Colors
+$background-primary: #0a0e27;
+$surface-primary: #141b3d;
+$card-primary: #1a2142;
+$background-dark: #0a0a0f;
+
+//Accent Colors
+$accent-purple: #7c3aed;
+$accent-cyan: #06b6d4;
+$accent-hover: #8b5cf6;
+$accent-gradient: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+
+//Text Colors
+$text-primary: #e5e7eb;
+$text-secondary: #9ca3af;
+$text-muted: #6b7280;
+$text-white: #ffffff;
+
+//Status Colors
+$success: #10b981;
+$warning: #f59e0b;
+$error: #ef4444;
+$info: #3b82f6;
+
+//Border & Divider Colors
+$border-primary: #2d3a5c;
+$border-glow: rgba(124, 58, 237, 0.3);
+
+//=== TYPOGRAPHY ===
+$font-heading: 'Poppins', sans-serif;
+$font-body: 'Inter', sans-serif;
+$font-mono: 'Fira Code', monospace;
+
+//Font Weights
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+//=== SPACING ===
+$spacing-xs: 0.5rem;    // 8px
+$spacing-sm: 1rem;      // 16px
+$spacing-md: 1.5rem;    // 24px
+$spacing-lg: 2rem;      // 32px
+$spacing-xl: 3rem;      // 48px
+$spacing-xxl: 4rem;     // 64px
+
+//=== BORDER RADIUS ===
+$radius-sm: 0.5rem;
+$radius-md: 0.75rem;
+$radius-lg: 1rem;
+$radius-xl: 1.5rem;
+
+//=== SHADOWS & GLOWS ===
+$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+$shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.3);
+$glow-purple: 0 0 20px rgba(124, 58, 237, 0.3);
+$glow-cyan: 0 0 20px rgba(6, 182, 212, 0.3);
+
+//=== GLASSMORPHISM EFFECTS ===
+@mixin glassmorphism {
+  background: rgba(26, 33, 66, 0.7);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.1);
+}
+
+@mixin glassmorphism-light {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+//=== BUTTON STYLES ===
+@mixin btn-primary {
+  background: linear-gradient(135deg, $accent-purple 0%, $accent-cyan 100%);
+  color: $text-white;
+  border: none;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-lg;
+  font-weight: $font-semibold;
+  transition: all 0.3s ease;
+  box-shadow: $glow-purple;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+  }
+}
+
+@mixin btn-secondary {
+  background: transparent;
+  color: $accent-purple;
+  border: 2px solid $accent-purple;
+  border-radius: $radius-md;
+  padding: $spacing-sm $spacing-lg;
+  font-weight: $font-semibold;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: $accent-purple;
+    color: $text-white;
+    box-shadow: $glow-purple;
+  }
+}
+
+//=== RESPONSIVE BREAKPOINTS ===
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+$breakpoint-desktop: 1440px;
+
+//=== ANIMATIONS ===
+$transition-fast: 0.2s ease;
+$transition-normal: 0.3s ease;
+$transition-slow: 0.5s ease;
+
+//=== CARD STYLES ===
+@mixin card-base {
+  background: $card-primary;
+  border-radius: $radius-lg;
+  border: 1px solid $border-primary;
+  transition: all $transition-normal;
+  
+  &:hover {
+    border-color: $accent-purple;
+    box-shadow: $glow-purple;
+    transform: translateY(-4px);
+  }
+}
+
+@mixin card-glow {
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.2);
+  border: 1px solid $accent-purple;
+}
