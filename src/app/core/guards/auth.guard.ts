@@ -13,17 +13,20 @@ export class AuthGuard implements CanActivate {
     private authService: AuthService,
     private router: Router
   ) {}
-
-  canActivate(): Observable<boolean | UrlTree> {
-    return this.authService.isAuthenticated$.pipe(
-      take(1),
-      map(isAuthenticated => {
-        if (isAuthenticated) {
-          return true;
-        } else {
-          return this.router.createUrlTree(['/signin']);
-        }
-      })
-    );
-  }
+canActivate(): Observable<boolean | UrlTree> {
+  return this.authService.isAuthenticated$.pipe(
+    take(1),
+    map(isAuthenticated => {
+      console.log('AuthGuard: isAuthenticated =', isAuthenticated);
+      
+      if (isAuthenticated) {
+        console.log('AuthGuard: Access granted');
+        return true;
+      } else {
+        console.log('AuthGuard: Redirecting to signin');
+        return this.router.createUrlTree(['/signin']);
+      }
+    })
+  );
+}
 }

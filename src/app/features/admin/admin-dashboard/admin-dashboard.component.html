@@ -1,0 +1,148 @@
+<div class="admin-dashboard">
+  <!-- Header -->
+  <div class="dashboard-header">
+    <h1 class="page-title">Admin Dashboard</h1>
+    <p class="page-subtitle">Manage your car marketplace platform</p>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <!-- Total Users -->
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="stat-icon users">
+          <mat-icon>people</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">{{ stats?.totalUsers?.toLocaleString() || '0' }}</div>
+          <div class="stat-label">Total Users</div>
+          <div class="stat-growth positive">
+            <mat-icon>trending_up</mat-icon>
+            {{ stats?.monthlyGrowth || 0 }}%
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Total Cars -->
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="stat-icon cars">
+          <mat-icon>directions_car</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">{{ stats?.totalCars?.toLocaleString() || '0' }}</div>
+          <div class="stat-label">Total Cars</div>
+          <div class="stat-growth positive">
+            <mat-icon>trending_up</mat-icon>
+            8.2%
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+    <!-- Pending Approvals -->
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="stat-icon pending">
+          <mat-icon>pending_actions</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">{{ stats?.pendingApprovals || '0' }}</div>
+          <div class="stat-label">Pending Approvals</div>
+          <div class="stat-growth negative">
+            <mat-icon>warning</mat-icon>
+            Needs attention
+          </div>
+        </div>
+      </div>
+      <mat-card-actions>
+        <button mat-button routerLink="/admin/cars" class="action-btn">
+          Review Now
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Total Revenue -->
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="stat-icon revenue">
+          <mat-icon>attach_money</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">{{ formatCurrency(stats?.totalRevenue || 0) }}</div>
+          <div class="stat-label">Total Revenue</div>
+          <div class="stat-growth positive">
+            <mat-icon>trending_up</mat-icon>
+            15.3%
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="section">
+    <h2 class="section-title">Quick Actions</h2>
+    <div class="quick-actions-grid">
+      <button mat-raised-button routerLink="/admin/users" class="action-card">
+        <mat-icon class="action-icon">manage_accounts</mat-icon>
+        <span class="action-text">Manage Users</span>
+      </button>
+
+      <button mat-raised-button routerLink="/admin/cars" class="action-card">
+        <mat-icon class="action-icon">car_rental</mat-icon>
+        <span class="action-text">Approve Cars</span>
+      </button>
+
+      <button mat-raised-button routerLink="/admin/analytics" class="action-card">
+        <mat-icon class="action-icon">analytics</mat-icon>
+        <span class="action-text">View Analytics</span>
+      </button>
+
+      <button mat-raised-button routerLink="/admin/settings" class="action-card">
+        <mat-icon class="action-icon">settings</mat-icon>
+        <span class="action-text">Settings</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="section">
+    <h2 class="section-title">Recent Activity</h2>
+    <div class="activity-list">
+      <div class="activity-item">
+        <mat-icon class="activity-icon">person_add</mat-icon>
+        <div class="activity-content">
+          <div class="activity-text">New user registration</div>
+          <div class="activity-time">2 minutes ago</div>
+        </div>
+      </div>
+
+      <div class="activity-item">
+        <mat-icon class="activity-icon">car_rental</mat-icon>
+        <div class="activity-content">
+          <div class="activity-text">New car listing submitted</div>
+          <div class="activity-time">15 minutes ago</div>
+        </div>
+      </div>
+
+      <div class="activity-item">
+        <mat-icon class="activity-icon">warning</mat-icon>
+        <div class="activity-content">
+          <div class="activity-text">User reported issue</div>
+          <div class="activity-time">1 hour ago</div>
+        </div>
+      </div>
+
+      <div class="activity-item">
+        <mat-icon class="activity-icon">payments</mat-icon>
+        <div class="activity-content">
+          <div class="activity-text">New sale completed</div>
+          <div class="activity-time">2 hours ago</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

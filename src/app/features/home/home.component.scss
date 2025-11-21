@@ -539,3 +539,21 @@
     height: 40px;
   }
 }
+// Add these to your existing SCSS
+.error-section {
+  text-align: center;
+  padding: vars.$spacing-xxl;
+  color: vars.$error;
+  
+  .error-icon {
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: vars.$spacing-md;
+  }
+  
+  h3 {
+    font-family: vars.$font-heading;
+    margin-bottom: vars.$spacing-sm;
+  }
+}

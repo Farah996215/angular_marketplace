@@ -44,7 +44,11 @@ export class NavbarComponent implements OnInit {
     this.authService.currentUser$.subscribe((user: User | null) => {
       this.currentUser = user;
       this.isLoggedIn = !!user;
+      console.log('Navbar - Auth State:', { isLoggedIn: this.isLoggedIn, user: this.currentUser });
     });
+    const token = localStorage.getItem('auth_token');
+    const userData = localStorage.getItem('user_data');
+    console.log('LocalStorage Check:', { token, userData });
   }
 
   getUserInitials(): string {

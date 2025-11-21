@@ -1,0 +1,350 @@
+@use '../../../../styles/variables' as vars;
+
+.dashboard-container {
+  padding: vars.$spacing-xl;
+  max-width: 1200px;
+  margin: 80px auto 0;
+  min-height: calc(100vh - 80px);
+  background: vars.$background-primary;
+}
+
+// Dashboard Header
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: vars.$spacing-xl;
+  
+  @media (max-width: vars.$breakpoint-tablet) {
+    flex-direction: column;
+    gap: vars.$spacing-lg;
+  }
+}
+
+.welcome-section {
+  flex: 1;
+}
+
+.welcome-title {
+  font-family: vars.$font-heading;
+  font-size: 2.5rem;
+  font-weight: vars.$font-bold;
+  color: vars.$text-primary;
+  margin-bottom: vars.$spacing-xs;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    font-size: 2rem;
+  }
+}
+
+.welcome-subtitle {
+  color: vars.$text-secondary;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+}
+
+.role-badge {
+  background: vars.$accent-gradient;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: vars.$font-semibold;
+  text-transform: uppercase;
+}
+
+.browse-cars-btn {
+  @include vars.btn-primary;
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+  
+  @media (max-width: vars.$breakpoint-tablet) {
+    align-self: flex-start;
+  }
+}
+
+// Stats Grid
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: vars.$spacing-lg;
+  margin-bottom: vars.$spacing-xxl;
+}
+
+.stat-card {
+  @include vars.card-base;
+  padding: vars.$spacing-lg;
+  
+  &:hover {
+    transform: translateY(-5px);
+    border-color: vars.$accent-purple;
+  }
+}
+
+.stat-content {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-lg;
+  margin-bottom: vars.$spacing-md;
+}
+
+.stat-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: vars.$radius-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &.favorites {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  }
+  
+  &.purchases {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+  }
+  
+  &.inquiries {
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+  }
+  
+  mat-icon {
+    font-size: 1.75rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    color: white;
+  }
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-number {
+  font-family: vars.$font-heading;
+  font-size: 2.5rem;
+  font-weight: vars.$font-bold;
+  color: vars.$text-primary;
+  line-height: 1;
+  margin-bottom: vars.$spacing-xs;
+}
+
+.stat-label {
+  color: vars.$text-secondary;
+  font-size: 0.9rem;
+  font-weight: vars.$font-medium;
+}
+
+.view-all-btn {
+  color: vars.$accent-purple !important;
+  font-weight: vars.$font-medium;
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-xs;
+  
+  &:hover {
+    background: rgba(124, 58, 237, 0.1) !important;
+  }
+}
+
+// Sections
+.section {
+  margin-bottom: vars.$spacing-xxl;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: vars.$spacing-lg;
+}
+
+.section-title {
+  font-family: vars.$font-heading;
+  font-size: 1.75rem;
+  font-weight: vars.$font-semibold;
+  color: vars.$text-primary;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    font-size: 1.5rem;
+  }
+}
+
+.view-all-link {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-xs;
+  color: vars.$accent-purple;
+  text-decoration: none;
+  font-weight: vars.$font-medium;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// Loading Section
+.loading-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: vars.$spacing-xxl;
+  color: vars.$text-secondary;
+  text-align: center;
+}
+
+.loading-spinner {
+  font-size: 3rem;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: vars.$spacing-md;
+  animation: spin 1s linear infinite;
+  color: vars.$accent-purple;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Favorites Grid
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: vars.$spacing-lg;
+}
+
+.favorite-card {
+  @include vars.card-base;
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-md;
+  padding: vars.$spacing-md;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-3px);
+    border-color: vars.$accent-purple;
+  }
+}
+
+.car-image {
+  width: 80px;
+  height: 60px;
+  border-radius: vars.$radius-md;
+  object-fit: cover;
+}
+
+.car-info {
+  flex: 1;
+}
+
+.car-name {
+  font-family: vars.$font-heading;
+  font-size: 1.1rem;
+  font-weight: vars.$font-semibold;
+  color: vars.$text-primary;
+  margin: 0 0 4px 0;
+}
+
+.car-year {
+  color: vars.$text-secondary;
+  font-size: 0.9rem;
+  margin: 0 0 4px 0;
+}
+
+.car-price {
+  font-family: vars.$font-heading;
+  font-size: 1.1rem;
+  font-weight: vars.$font-bold;
+  color: vars.$accent-cyan;
+  margin: 0;
+}
+
+.view-details-btn {
+  color: vars.$text-secondary !important;
+  
+  &:hover {
+    color: vars.$accent-purple !important;
+    background: rgba(124, 58, 237, 0.1) !important;
+  }
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: vars.$spacing-xxl;
+  color: vars.$text-secondary;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: vars.$spacing-lg;
+  color: vars.$text-muted;
+}
+
+.empty-state h3 {
+  font-family: vars.$font-heading;
+  font-size: 1.5rem;
+  color: vars.$text-primary;
+  margin-bottom: vars.$spacing-sm;
+}
+
+.empty-state p {
+  margin-bottom: vars.$spacing-lg;
+  font-size: 1.1rem;
+}
+
+.browse-btn {
+  @include vars.btn-primary;
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+}
+
+// Quick Actions
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: vars.$spacing-md;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: vars.$spacing-sm;
+  padding: vars.$spacing-lg !important;
+  border-color: vars.$border-primary !important;
+  color: vars.$text-primary !important;
+  font-weight: vars.$font-medium;
+  
+  &:hover {
+    border-color: vars.$accent-purple !important;
+    background: rgba(124, 58, 237, 0.1) !important;
+    color: vars.$accent-purple !important;
+  }
+  
+  mat-icon {
+    color: vars.$text-secondary;
+  }
+}
+
+// Material Overrides
+:host ::ng-deep {
+  .mat-mdc-card {
+    background: vars.$card-primary;
+    border: 1px solid vars.$border-primary;
+  }
+  
+  .mat-mdc-card-actions {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+}

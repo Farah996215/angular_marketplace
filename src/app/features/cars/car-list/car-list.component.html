@@ -1,0 +1,210 @@
+<div class="car-list-container">
+  <!-- Header -->
+  <div class="page-header">
+    <div class="header-content">
+      <h1 class="page-title">Browse All Cars</h1>
+      <p class="page-subtitle">Find your perfect vehicle from our extensive collection</p>
+    </div>
+    <div class="header-actions">
+      <button mat-raised-button class="sell-car-btn" routerLink="/signup">
+        <mat-icon>add_circle</mat-icon>
+        Sell Your Car
+      </button>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    <!-- Filters Sidebar -->
+    <aside class="filters-sidebar">
+      <div class="filters-header">
+        <h3>Filters</h3>
+        <button mat-button class="clear-filters" (click)="clearFilters()">
+          Clear All
+        </button>
+      </div>
+
+      <!-- Search -->
+      <div class="filter-section">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Search cars...</mat-label>
+          <input matInput 
+                 [(ngModel)]="searchQuery" 
+                 (input)="onSearchChange()"
+                 placeholder="Brand, model, location...">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
+
+      <!-- Brand Filter -->
+      <div class="filter-section">
+        <h4>Brand</h4>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Select Brand</mat-label>
+          <mat-select [(value)]="filter.brand" (selectionChange)="applyFilters()">
+            <mat-option value="">All Brands</mat-option>
+            @for (brand of brands; track brand) {
+              <mat-option [value]="brand">{{ brand }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Price Range -->
+      <div class="filter-section">
+        <h4>Price Range</h4>
+        <div class="range-values">
+          <span>${{priceRange[0].toLocaleString()}}</span>
+          <span>${{priceRange[1].toLocaleString()}}</span>
+        </div>
+        <mat-slider min="0" max="200000" step="1000" class="full-width">
+          <input matSliderStartThumb [(ngModel)]="priceRange[0]" (change)="applyFilters()">
+          <input matSliderEndThumb [(ngModel)]="priceRange[1]" (change)="applyFilters()">
+        </mat-slider>
+      </div>
+
+      <!-- Year Range -->
+      <div class="filter-section">
+        <h4>Year Range</h4>
+        <div class="range-values">
+          <span>{{yearRange[0]}}</span>
+          <span>{{yearRange[1]}}</span>
+        </div>
+        <mat-slider min="2010" max="2024" step="1" class="full-width">
+          <input matSliderStartThumb [(ngModel)]="yearRange[0]" (change)="applyFilters()">
+          <input matSliderEndThumb [(ngModel)]="yearRange[1]" (change)="applyFilters()">
+        </mat-slider>
+      </div>
+
+      <!-- Fuel Type -->
+      <div class="filter-section">
+        <h4>Fuel Type</h4>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Fuel Type</mat-label>
+          <mat-select [(value)]="filter.fuelType" (selectionChange)="applyFilters()">
+            <mat-option value="">All Fuel Types</mat-option>
+            @for (fuelType of fuelTypes; track fuelType) {
+              <mat-option [value]="fuelType">{{ fuelType }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Transmission -->
+      <div class="filter-section">
+        <h4>Transmission</h4>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Transmission</mat-label>
+          <mat-select [(value)]="filter.transmission" (selectionChange)="applyFilters()">
+            <mat-option value="">All Transmissions</mat-option>
+            <mat-option value="Automatic">Automatic</mat-option>
+            <mat-option value="Manual">Manual</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <!-- Body Type -->
+      <div class="filter-section">
+        <h4>Body Type</h4>
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Body Type</mat-label>
+          <mat-select [(value)]="filter.bodyType" (selectionChange)="applyFilters()">
+            <mat-option value="">All Body Types</mat-option>
+            @for (bodyType of bodyTypes; track bodyType) {
+              <mat-option [value]="bodyType">{{ bodyType }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Results Header -->
+      <div class="results-header">
+        <div class="results-info">
+          <span class="results-count">{{ resultCount }}</span>
+        </div>
+        
+        <div class="view-controls">
+          <!-- Sort Options -->
+          <mat-form-field appearance="outline" class="sort-select">
+            <mat-label>Sort by</mat-label>
+            <mat-select [(value)]="sortBy" (selectionChange)="sortCars(sortBy)">
+              <mat-option value="featured">Featured</mat-option>
+              <mat-option value="price-low">Price: Low to High</mat-option>
+              <mat-option value="price-high">Price: High to Low</mat-option>
+              <mat-option value="year-new">Year: Newest First</mat-option>
+              <mat-option value="year-old">Year: Oldest First</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- View Toggle -->
+          <div class="view-toggle">
+            <button mat-icon-button 
+                    [class.active]="viewMode === 'grid'" 
+                    (click)="viewMode = 'grid'">
+              <mat-icon>grid_view</mat-icon>
+            </button>
+            <button mat-icon-button 
+                    [class.active]="viewMode === 'list'" 
+                    (click)="viewMode = 'list'">
+              <mat-icon>view_list</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      @if (isLoading) {
+        <div class="loading-section">
+          <mat-icon class="loading-spinner">refresh</mat-icon>
+          <p>Loading cars...</p>
+        </div>
+      }
+
+      <!-- No Results -->
+      @if (!isLoading && filteredCars.length === 0) {
+        <div class="no-results">
+          <mat-icon class="no-results-icon">search_off</mat-icon>
+          <h3>No cars found</h3>
+          <p>Try adjusting your filters or search terms</p>
+          <button mat-raised-button (click)="clearFilters()" class="clear-filters-btn">
+            Clear All Filters
+          </button>
+        </div>
+      }
+
+      <!-- Cars Grid/List -->
+      @if (!isLoading && filteredCars.length > 0) {
+        @if (viewMode === 'grid') {
+          <div class="cars-grid">
+            @for (car of filteredCars; track car.id) {
+              <app-car-card [car]="car"></app-car-card>
+            }
+          </div>
+        } @else {
+          <div class="cars-list">
+            @for (car of filteredCars; track car.id) {
+              <div class="list-card">
+                <img [src]="car.image" [alt]="car.brand + ' ' + car.model" class="list-image">
+                <div class="list-content">
+                  <div class="car-info">
+                    <h3 class="car-title">{{ car.brand }} {{ car.model }}</h3>
+                    <p class="car-specs">{{ car.year }} • {{ car.mileage.toLocaleString() }} km • {{ car.fuelType }} • {{ car.transmission }}</p>
+                    <p class="car-location">{{ car.location }}</p>
+                  </div>
+                  <div class="car-price">
+                    <span class="price">${{ car.price.toLocaleString() }}</span>
+                    <button mat-raised-button [routerLink]="['/cars', car.id]" class="view-details-btn">
+                      View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      }
+    </main>
+  </div>
+</div>

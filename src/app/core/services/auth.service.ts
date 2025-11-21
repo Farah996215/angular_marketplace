@@ -208,4 +208,13 @@ export class AuthService {
       return false;
     }
   }
+  debugUsers(): void {
+  const users = this.getUsersFromStorage();
+  console.log('Registered Users:', users);
+  console.log('Current Auth State:', {
+    token: this.getToken(),
+    user: this.getUser(),
+    isAuthenticated: this.isAuthenticatedSubject.value
+  });
+}
 }

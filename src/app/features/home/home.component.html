@@ -17,12 +17,12 @@
       </p>
 
       <div class="hero-actions">
-        <button class="btn-primary hero-btn" mat-raised-button>
+        <button class="btn-primary hero-btn" mat-raised-button routerLink="/cars">
           <mat-icon>search</mat-icon>
           Browse Cars
         </button>
 
-        <button class="btn-secondary hero-btn" mat-stroked-button>
+        <button class="btn-secondary hero-btn" mat-stroked-button routerLink="/signup">
           <mat-icon>add_circle</mat-icon>
           Sell Your Car
         </button>
@@ -48,92 +48,51 @@
   </div>
 </section>
 
-<!-- Featured Cars Section -->
+<!-- Featured Cars Section with API -->
 <section class="featured-cars-section">
   <div class="container">
 
     <!-- Section Header -->
     <div class="section-header">
       <h2 class="section-title">Featured Cars</h2>
-      <p class="section-subtitle">Discover our premium selection of vehicles</p>
+      <p class="section-subtitle">
+        @if (apiError) {
+          Demo Data (API Connection Failed)
+        } @else {
+          Real car data from API Ninjas
+        }
+      </p>
     </div>
+
+    <!-- Loading State -->
+    @if (isLoading) {
+      <div class="loading-section">
+        <mat-icon class="loading-spinner">refresh</mat-icon>
+        <p>Loading real car data from API...</p>
+      </div>
+    }
+
+    <!-- Error State -->
+    @if (apiError && !isLoading) {
+      <div class="error-section">
+        <mat-icon class="error-icon">error</mat-icon>
+        <h3>API Connection Issue</h3>
+        <p>Using demo data. Please check your API key.</p>
+      </div>
+    }
 
     <!-- Cars Grid -->
-    <div class="cars-grid">
-
-      <!-- Car Card 1 -->
-      <app-car-card
-        [car]="{
-          id: 1,
-          image: 'https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=500&q=80',
-          brand: 'BMW',
-          model: 'X5',
-          year: 2023,
-          price: 65000,
-          mileage: 15000,
-          fuelType: 'Petrol',
-          transmission: 'Automatic',
-          isFeatured: true,
-          isNew: true
-        }"
-      ></app-car-card>
-
-      <!-- Car Card 2 -->
-      <app-car-card
-        [car]="{
-          id: 2,
-          image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=500&q=80',
-          brand: 'Mercedes',
-          model: 'C-Class',
-          year: 2022,
-          price: 45000,
-          mileage: 22000,
-          fuelType: 'Petrol',
-          transmission: 'Automatic',
-          isFeatured: true,
-          isNew: false
-        }"
-      ></app-car-card>
-
-      <!-- Car Card 3 -->
-      <app-car-card
-        [car]="{
-          id: 3,
-          image: 'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=500&q=80',
-          brand: 'Audi',
-          model: 'A4',
-          year: 2023,
-          price: 42000,
-          mileage: 8000,
-          fuelType: 'Diesel',
-          transmission: 'Automatic',
-          isFeatured: true,
-          isNew: true
-        }"
-      ></app-car-card>
-
-      <!-- Car Card 4 -->
-      <app-car-card
-        [car]="{
-          id: 4,
-          image: 'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=500&q=80',
-          brand: 'Tesla',
-          model: 'Model 3',
-          year: 2023,
-          price: 52000,
-          mileage: 5000,
-          fuelType: 'Electric',
-          transmission: 'Automatic',
-          isFeatured: true,
-          isNew: true
-        }"
-      ></app-car-card>
-
-    </div>
+    @if (!isLoading) {
+      <div class="cars-grid">
+        @for (car of featuredCars; track car.id) {
+          <app-car-card [car]="car"></app-car-card>
+        }
+      </div>
+    }
 
     <!-- View All Button -->
     <div class="section-footer">
-      <button class="btn-secondary view-all-btn" mat-stroked-button>
+      <button class="btn-secondary view-all-btn" mat-stroked-button routerLink="/cars">
         View All Cars
         <mat-icon>arrow_forward</mat-icon>
       </button>
@@ -141,20 +100,18 @@
 
   </div>
 </section>
+
 <!-- How It Works Section -->
 <section class="how-it-works-section">
   <div class="container">
-    
-    <!-- Section Header -->
+
     <div class="section-header">
       <h2 class="section-title">How It Works</h2>
       <p class="section-subtitle">Get your dream car in just 3 simple steps</p>
     </div>
 
-    <!-- Steps Grid -->
     <div class="steps-grid">
-      
-      <!-- Step 1 -->
+
       <div class="step-card">
         <div class="step-icon-container">
           <div class="step-number">01</div>
@@ -166,7 +123,6 @@
         </p>
       </div>
 
-      <!-- Step 2 -->
       <div class="step-card">
         <div class="step-icon-container">
           <div class="step-number">02</div>
@@ -178,7 +134,6 @@
         </p>
       </div>
 
-      <!-- Step 3 -->
       <div class="step-card">
         <div class="step-icon-container">
           <div class="step-number">03</div>
@@ -191,23 +146,20 @@
       </div>
 
     </div>
-
   </div>
 </section>
+
 <!-- Testimonials Section -->
 <section class="testimonials-section">
   <div class="container">
-    
-    <!-- Section Header -->
+
     <div class="section-header">
       <h2 class="section-title">What Our Customers Say</h2>
       <p class="section-subtitle">Trusted by thousands of happy car buyers</p>
     </div>
 
-    <!-- Testimonials Carousel -->
     <div class="testimonials-carousel">
-      
-      <!-- Testimonial 1 -->
+
       <div class="testimonial-card">
         <div class="testimonial-content">
           <div class="stars">
@@ -218,15 +170,11 @@
             <mat-icon>star</mat-icon>
           </div>
           <p class="testimonial-text">
-            "Found my dream BMW X5 through this platform! The process was smooth and the seller was very professional. Highly recommended!"
+            "Found my dream BMW X5 through this platform! The process was smooth and the seller was very professional."
           </p>
         </div>
         <div class="testimonial-author">
-          <img 
-            src="pictures/majdi.jpg"
-            alt="Majdi Aloui"
-            class="author-avatar"
-          />
+          <img src="pictures/majdi.jpg" alt="Majdi Aloui" class="author-avatar" />
           <div class="author-info">
             <h4 class="author-name">Majdi Aloui</h4>
             <p class="author-role">Car Enthusiast</p>
@@ -234,7 +182,6 @@
         </div>
       </div>
 
-      <!-- Testimonial 2 -->
       <div class="testimonial-card">
         <div class="testimonial-content">
           <div class="stars">
@@ -242,17 +189,14 @@
             <mat-icon>star</mat-icon>
             <mat-icon>star</mat-icon>
             <mat-icon>star</mat-icon>
+            <mat-icon>star</mat-icon>
           </div>
           <p class="testimonial-text">
-            "As a first-time car buyer, I was nervous. But the team helped me find the perfect Honda Civic within my budget. Amazing experience!"
+            "As a first-time car buyer, I was nervous. But I found the perfect Honda Civic within my budget!"
           </p>
         </div>
         <div class="testimonial-author">
-          <img 
-            src="pictures/nada.jpg" 
-            alt="Nada Jaouadi"
-            class="author-avatar"
-          >
+          <img src="pictures/nada.jpg" alt="Nada Jaouadi" class="author-avatar" />
           <div class="author-info">
             <h4 class="author-name">Nada Jaouadi</h4>
             <p class="author-role">First-time Buyer</p>
@@ -260,7 +204,6 @@
         </div>
       </div>
 
-      <!-- Testimonial 3 -->
       <div class="testimonial-card">
         <div class="testimonial-content">
           <div class="stars">
@@ -271,15 +214,11 @@
             <mat-icon>star_half</mat-icon>
           </div>
           <p class="testimonial-text">
-            "Sold my old car and bought a new Tesla Model 3 all on the same platform. The commission rates are very reasonable!"
+            "Sold my car and bought a Tesla Model 3 on the same platform. Very reasonable commission fees!"
           </p>
         </div>
         <div class="testimonial-author">
-          <img 
-            src="pictures/salim.jpg" 
-            alt="Salim Jeddi"
-            class="author-avatar"
-          >
+          <img src="pictures/salim.jpg" alt="Salim Jeddi" class="author-avatar" />
           <div class="author-info">
             <h4 class="author-name">Salim Jeddi</h4>
             <p class="author-role">Business Owner</p>
@@ -289,7 +228,6 @@
 
     </div>
 
-    <!-- Carousel Indicators -->
     <div class="carousel-indicators">
       <button class="indicator active"></button>
       <button class="indicator"></button>
@@ -298,4 +236,5 @@
 
   </div>
 </section>
+
 <app-footer></app-footer>

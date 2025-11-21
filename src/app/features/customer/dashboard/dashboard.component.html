@@ -1,0 +1,193 @@
+<div class="dashboard-container">
+  <!-- Dashboard Header -->
+  <div class="dashboard-header">
+    <div class="welcome-section">
+      <h1 class="welcome-title">{{ getUserGreeting() }}</h1>
+      <p class="welcome-subtitle">
+        Member since {{ getMemberSince() }} • 
+        <span class="role-badge">{{ currentUser?.role | titlecase }}</span>
+      </p>
+    </div>
+    <button 
+      mat-raised-button 
+      class="browse-cars-btn"
+      routerLink="/cars"
+    >
+      <mat-icon>search</mat-icon>
+      Browse Cars
+    </button>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="stats-grid">
+    <!-- Favorites Card -->
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="stat-icon favorites">
+          <mat-icon>favorite</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">{{ stats.favorites }}</div>
+          <div class="stat-label">Favorite Cars</div>
+        </div>
+      </div>
+      <mat-card-actions>
+        <button 
+          mat-button 
+          routerLink="/customer/favorites"
+          class="view-all-btn"
+        >
+          View All
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Purchases Card -->
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="stat-icon purchases">
+          <mat-icon>shopping_cart</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">{{ stats.purchases }}</div>
+          <div class="stat-label">Purchases</div>
+        </div>
+      </div>
+      <mat-card-actions>
+        <button 
+          mat-button 
+          routerLink="/customer/purchases"
+          class="view-all-btn"
+        >
+          View History
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+    <!-- Inquiries Card -->
+    <mat-card class="stat-card">
+      <div class="stat-content">
+        <div class="stat-icon inquiries">
+          <mat-icon>message</mat-icon>
+        </div>
+        <div class="stat-info">
+          <div class="stat-number">{{ stats.inquiries }}</div>
+          <div class="stat-label">Active Inquiries</div>
+        </div>
+      </div>
+      <mat-card-actions>
+        <button 
+          mat-button 
+          routerLink="/customer/purchases"
+          class="view-all-btn"
+        >
+          View Inquiries
+          <mat-icon>arrow_forward</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <!-- Recent Favorites Section -->
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title">Recent Favorites</h2>
+      <a 
+        routerLink="/customer/favorites" 
+        class="view-all-link"
+      >
+        View All Favorites
+        <mat-icon>arrow_forward</mat-icon>
+      </a>
+    </div>
+
+    @if (isLoading) {
+      <div class="loading-section">
+        <mat-icon class="loading-spinner">refresh</mat-icon>
+        <p>Loading your favorites...</p>
+      </div>
+    } @else if (recentFavorites.length > 0) {
+      <div class="favorites-grid">
+        @for (car of recentFavorites; track car.id) {
+          <div class="favorite-card">
+            <img 
+              [src]="car.image" 
+              [alt]="car.brand + ' ' + car.model"
+              class="car-image"
+            >
+            <div class="car-info">
+              <h3 class="car-name">{{ car.brand }} {{ car.model }}</h3>
+              <p class="car-year">{{ car.year }}</p>
+              <p class="car-price">{{ car.price | currency:'USD':'symbol':'1.0-0' }}</p>
+            </div>
+            <button 
+              mat-icon-button 
+              class="view-details-btn"
+              [routerLink]="['/cars', car.id]"
+            >
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="empty-state">
+        <mat-icon class="empty-icon">favorite_border</mat-icon>
+        <h3>No favorites yet</h3>
+        <p>Start browsing cars and add them to your favorites!</p>
+        <button 
+          mat-raised-button 
+          routerLink="/cars"
+          class="browse-btn"
+        >
+          <mat-icon>search</mat-icon>
+          Browse Cars
+        </button>
+      </div>
+    }
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="section">
+    <h2 class="section-title">Quick Actions</h2>
+    <div class="quick-actions">
+      <button 
+        mat-stroked-button 
+        routerLink="/customer/profile"
+        class="action-btn"
+      >
+        <mat-icon>person</mat-icon>
+        Edit Profile
+      </button>
+      
+      <button 
+        mat-stroked-button 
+        routerLink="/customer/settings"
+        class="action-btn"
+      >
+        <mat-icon>settings</mat-icon>
+        Account Settings
+      </button>
+      
+      <button 
+        mat-stroked-button 
+        routerLink="/cars"
+        class="action-btn"
+      >
+        <mat-icon>search</mat-icon>
+        Search Cars
+      </button>
+      
+      <button 
+        mat-stroked-button 
+        routerLink="/customer/favorites"
+        class="action-btn"
+      >
+        <mat-icon>favorite</mat-icon>
+        My Favorites
+      </button>
+    </div>
+  </div>
+</div>

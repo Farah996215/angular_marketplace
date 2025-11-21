@@ -1,0 +1,160 @@
+<div class="profile-container">
+  <div class="profile-content">
+    
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="avatar-section">
+        <div class="user-avatar large">
+          {{ getAvatarInitials() }}
+        </div>
+        <div class="user-info">
+          <h1 class="user-name">
+            {{ currentUser?.firstName }} {{ currentUser?.lastName }}
+          </h1>
+          <p class="user-email">{{ currentUser?.email }}</p>
+          <p class="member-since">
+            Member since {{ getMemberSince() }}
+          </p>
+        </div>
+      </div>
+      
+      <button 
+        mat-stroked-button 
+        (click)="toggleEdit()" 
+        class="edit-btn"
+        [class.editing]="isEditing"
+      >
+        <mat-icon>{{ isEditing ? 'close' : 'edit' }}</mat-icon>
+        {{ isEditing ? 'Cancel' : 'Edit Profile' }}
+      </button>
+    </div>
+
+    <!-- Profile Form -->
+    <mat-card class="profile-card">
+      <mat-card-header>
+        <mat-card-title>Personal Information</mat-card-title>
+        <mat-card-subtitle>Update your personal details and contact information</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="profile-form">
+          
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>First Name</mat-label>
+              <input matInput formControlName="firstName" placeholder="Your first name">
+              <mat-icon matSuffix>person</mat-icon>
+              @if (profileForm.get('firstName')?.hasError('required')) {
+                <mat-error>First name is required</mat-error>
+              }
+              @if (profileForm.get('firstName')?.hasError('minlength')) {
+                <mat-error>Minimum 2 characters</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput formControlName="lastName" placeholder="Your last name">
+              <mat-icon matSuffix>person</mat-icon>
+              @if (profileForm.get('lastName')?.hasError('required')) {
+                <mat-error>Last name is required</mat-error>
+              }
+              @if (profileForm.get('lastName')?.hasError('minlength')) {
+                <mat-error>Minimum 2 characters</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Email Address</mat-label>
+            <input matInput formControlName="email" type="email" placeholder="your.email@example.com">
+            <mat-icon matSuffix>email</mat-icon>
+            @if (profileForm.get('email')?.hasError('required')) {
+              <mat-error>Email is required</mat-error>
+            }
+            @if (profileForm.get('email')?.hasError('email')) {
+              <mat-error>Please enter a valid email</mat-error>
+            }
+            <mat-hint>Email cannot be changed</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Phone Number</mat-label>
+            <input matInput formControlName="phone" placeholder="+1 (555) 123-4567">
+            <mat-icon matSuffix>phone</mat-icon>
+            @if (profileForm.get('phone')?.hasError('required')) {
+              <mat-error>Phone number is required</mat-error>
+            }
+            @if (profileForm.get('phone')?.hasError('pattern')) {
+              <mat-error>Please enter a valid phone number</mat-error>
+            }
+          </mat-form-field>
+
+       @if (isEditing) {
+  <div class="form-actions">
+    @if (isLoading) {
+      <button 
+        mat-raised-button 
+        type="submit" 
+        class="save-btn"
+        disabled
+      >
+        <mat-icon class="spinner">refresh</mat-icon>
+        <span>Saving...</span>
+      </button>
+    } @else {
+      <button 
+        mat-raised-button 
+        type="submit" 
+        class="save-btn"
+        [disabled]="!profileForm.valid"
+      >
+        <mat-icon>save</mat-icon>
+        <span>Save Changes</span>
+      </button>
+    }
+  </div>
+}
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Account Info Card -->
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>Account Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <mat-icon class="info-icon">badge</mat-icon>
+            <div class="info-content">
+              <div class="info-label">Account Role</div>
+              <div class="info-value">{{ currentUser?.role | titlecase }}</div>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon class="info-icon">calendar_today</mat-icon>
+            <div class="info-content">
+              <div class="info-label">Member Since</div>
+              <div class="info-value">{{ getMemberSince() }}</div>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <mat-icon class="info-icon">verified</mat-icon>
+            <div class="info-content">
+              <div class="info-label">Account Status</div>
+              <div class="info-value status-active">
+                <mat-icon>check_circle</mat-icon>
+                Active
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>

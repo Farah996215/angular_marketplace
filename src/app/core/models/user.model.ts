@@ -26,3 +26,16 @@ export interface RegisterData {
   role: 'customer' | 'seller';
   agreeToTerms: boolean;
 }
+export interface Car {
+  id: number;
+  image: string;
+  brand: string;
+  model: string;
+  year: number;
+  price: number;
+  mileage: number;
+  fuelType: string;
+  transmission: string;
+  isFeatured?: boolean;
+  isNew?: boolean;
+}

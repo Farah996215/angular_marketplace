@@ -1,0 +1,346 @@
+@use '../../../../styles/variables' as vars;
+
+.profile-container {
+  padding: vars.$spacing-xl;
+  max-width: 1000px;
+  margin: 80px auto 0;
+  min-height: calc(100vh - 80px);
+  background: vars.$background-primary;
+}
+
+.profile-content {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-xl;
+}
+
+// Profile Header
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: vars.$spacing-xl;
+  background: vars.$card-primary;
+  border-radius: vars.$radius-lg;
+  border: 1px solid vars.$border-primary;
+  
+  @media (max-width: vars.$breakpoint-tablet) {
+    flex-direction: column;
+    gap: vars.$spacing-lg;
+  }
+}
+
+.avatar-section {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-lg;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    flex-direction: column;
+    text-align: center;
+    gap: vars.$spacing-md;
+  }
+}
+
+.user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: vars.$accent-gradient;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: vars.$font-bold;
+  font-size: 1.5rem;
+  
+  &.large {
+    width: 100px;
+    height: 100px;
+    font-size: 2rem;
+  }
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-family: vars.$font-heading;
+  font-size: 2rem;
+  font-weight: vars.$font-bold;
+  color: vars.$text-primary;
+  margin: 0 0 vars.$spacing-xs 0;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    font-size: 1.75rem;
+  }
+}
+
+.user-email {
+  color: vars.$text-secondary;
+  font-size: 1.1rem;
+  margin: 0 0 vars.$spacing-xs 0;
+}
+
+.member-since {
+  color: vars.$text-muted;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.edit-btn {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+  border-color: vars.$border-primary !important;
+  color: vars.$text-secondary !important;
+  
+  &:hover {
+    border-color: vars.$accent-purple !important;
+    color: vars.$accent-purple !important;
+  }
+  
+  &.editing {
+    border-color: vars.$error !important;
+    color: vars.$error !important;
+    
+    &:hover {
+      background: rgba(239, 68, 68, 0.1) !important;
+    }
+  }
+}
+
+// Profile Card
+.profile-card {
+  background: vars.$card-primary !important;
+  border: 1px solid vars.$border-primary !important;
+  
+  .mat-mdc-card-header {
+    padding: vars.$spacing-lg vars.$spacing-lg 0;
+  }
+  
+  .mat-mdc-card-title {
+    font-family: vars.$font-heading;
+    font-size: 1.5rem;
+    font-weight: vars.$font-semibold;
+    color: vars.$text-primary;
+  }
+  
+  .mat-mdc-card-subtitle {
+    color: vars.$text-secondary;
+    font-size: 1rem;
+  }
+  
+  .mat-mdc-card-content {
+    padding: vars.$spacing-lg;
+  }
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$spacing-lg;
+}
+
+.form-row {
+  display: flex;
+  gap: vars.$spacing-lg;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.half-width {
+  flex: 1;
+  
+  @media (max-width: vars.$breakpoint-mobile) {
+    width: 100%;
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+
+// Form Actions
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: vars.$spacing-lg;
+}
+
+.save-btn {
+  @include vars.btn-primary;
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-sm;
+  padding: vars.$spacing-md vars.$spacing-xl !important;
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+// Info Card
+.info-card {
+  background: vars.$card-primary !important;
+  border: 1px solid vars.$border-primary !important;
+  
+  .mat-mdc-card-header {
+    padding: vars.$spacing-lg vars.$spacing-lg 0;
+  }
+  
+  .mat-mdc-card-title {
+    font-family: vars.$font-heading;
+    font-size: 1.5rem;
+    font-weight: vars.$font-semibold;
+    color: vars.$text-primary;
+  }
+  
+  .mat-mdc-card-content {
+    padding: vars.$spacing-lg;
+  }
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: vars.$spacing-lg;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-md;
+  padding: vars.$spacing-md;
+  background: rgba(124, 58, 237, 0.05);
+  border-radius: vars.$radius-md;
+  border: 1px solid rgba(124, 58, 237, 0.1);
+}
+
+.info-icon {
+  color: vars.$accent-purple;
+  font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-label {
+  font-size: 0.9rem;
+  color: vars.$text-secondary;
+  margin-bottom: 4px;
+}
+
+.info-value {
+  font-family: vars.$font-heading;
+  font-size: 1.1rem;
+  font-weight: vars.$font-semibold;
+  color: vars.$text-primary;
+}
+
+.status-active {
+  display: flex;
+  align-items: center;
+  gap: vars.$spacing-xs;
+  color: vars.$success;
+  
+  mat-icon {
+    font-size: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+// Material Form Field Overrides
+:host ::ng-deep {
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+  
+  .mdc-text-field--outlined {
+    background: vars.$surface-primary;
+    
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: vars.$border-primary !important;
+    }
+    
+    &:hover {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: vars.$accent-purple !important;
+      }
+    }
+    
+    &.mdc-text-field--focused {
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: vars.$accent-purple !important;
+      }
+    }
+  }
+  
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
+  
+  .mat-mdc-form-field-error {
+    color: vars.$error;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+  
+  .mat-mdc-input-element {
+    color: vars.$text-primary;
+    
+    &::placeholder {
+      color: vars.$text-muted;
+    }
+  }
+  
+  .mat-mdc-form-field-label {
+    color: vars.$text-secondary !important;
+  }
+  
+  .mat-mdc-form-field-icon-suffix {
+    color: vars.$text-secondary;
+  }
+  
+  .mat-mdc-form-field-hint {
+    color: vars.$text-muted;
+    font-size: 0.8rem;
+  }
+}
+
+// Snackbar Styles (for success/error messages)
+:host ::ng-deep {
+  .success-snackbar {
+    background: vars.$success !important;
+    color: white !important;
+  }
+  
+  .error-snackbar {
+    background: vars.$error !important;
+    color: white !important;
+  }
+}
